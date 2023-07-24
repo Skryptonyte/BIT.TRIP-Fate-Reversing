@@ -10,6 +10,7 @@ Very much work in progress. I will probably upload some additional scripts along
 
 * Each level is loaded in two separate parts. The level model itself is loaded from an aescn file ( which is basically a 3D model file used by the atrophy engine afaik ), which I speculate has the actual 3D background as well as the "thread" that Commander Video can move in. However the entity spawning positions such as enemies, bosses etc and positioning of certain effects like floating in game text, music transition etc are entirely hardcoded. For this purpose, there are six massive functions each for six respective levels. I will consider these functions to be related to entity data of each level. Entities appaear to spawn at set time lapses which I was partly able to figure this out from the weird behaviour I was observing when I used breakpoints and ended up figuring out that many of the game elements seem to be time based rather than position based.
 * Bunch of mundane stuff related to config loading and saving. Nothing too remarkable here.
+* Though the Steam API is present, there doesn't appear to be any anti debug mechanism. There is a single isDebugger() check in the main function but I don't think that does anything particularly interesting.
 
 # Unused stuff
 * Lots of leftover resources from the Wii BIT.TRIP collection. You can find a bunch of leftover text related to disc errors, NAND errors etc which aren't used in the PC version for obvious reasons.
