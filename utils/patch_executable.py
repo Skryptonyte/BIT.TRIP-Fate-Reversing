@@ -22,6 +22,14 @@ def patch_start_with_giga_mode(binary):
 
 
 
+def patch_giga_control(binary):
+    current_mode_address = 0x0491979
+
+    asm = b'\x83\xa0\xd0\x00\x00\x00\xfe' # and DWORD PTR [eax+0xd0], ~1
+    binary.patch_address(current_mode_address,list(asm),lief.Binary.VA_TYPES.VA)
+
+    print("-- Giga Mode Control patched")
+
 def patch_disable_mode_down(binary):
     current_mode_address = 0x47db40
 
@@ -30,10 +38,17 @@ def patch_disable_mode_down(binary):
 
     print("-- Mode Down patched out!")
 
+def patch_boot_original_aksys_logo(binary):
+    commonbootfile_address = 0x04FD0BC
+
+    filename = b"Common/Boot/BootUS.aemenu\x00"
+    binary.patch_address(commonbootfile_address,list(filename),lief.Binary.VA_TYPES.VA)
+    print("-- Use original Wii aemenu")
 
 patch_start_with_giga_mode(binary)
 patch_disable_mode_down(binary)
-
+patch_giga_control(binary)
+patch_boot_original_aksys_logo(binary)
 print("Writing patched exe")
 binary.write("BIT.TRIP FATE.patched.exe")
 
