@@ -19,9 +19,34 @@ Very much work in progress. I will probably upload some additional scripts along
 
 You can load entity data of another level on top of a selected level, say you want to play the FRUSTRATION enemy layout on top of the DETERMINATION map by making a breakpoint at 0xC7857A in IDA and changing the eax register to a value between 0-6. 0-5 are the entity loading functions of the main levels in order and 6 is for the unused level. Note that this method I am suggesting will not change the level map, only the entities aka where and what enemies spawn, what text appears etc etc so expect to see some crazy stuff! You can actually load the unused level data on any selected level and just cheese a perfect on all 6 levels really.
 
+# File Formats
+
+## aeshader
+
+aeshader files are just vanilla HLSL shaders on PC with both vertex and pixel shader logic. Nothing special if you know a bit of shader programming.
+
+## aemenu
+
+I have not looked into the exact file structure of this yet. aemenu files seem to be used for certain screen transitions and menus. aemenufiles appear to store references to other aetex and aefnt files.
+
+In essence, aemenu acts like an index of some resource files to let the game know what to load.
+
+## aetex
+
+Used to store textures used in game. 
+
+## aefnt
+
+Used to store fonts.
+
 # What have I got?
 
-patch_executable.py is a basic patcher script that will start the player off from GIGA mode and disable any mode downs, meaning effective invincibility.
+patch_executable.py is a basic patcher script to patch the main game executable.
+
+* Start player off in GIGA mode.
+* Disable mode down and ensure invincibility
+* Apply GIGA HUD by patching internal GigaControl
+* Load original unused Aksys Games logo
 
 # TODO
 * Reverse AETEX, AESCN, AEMENU, AESHADER files
